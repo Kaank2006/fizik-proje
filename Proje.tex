@@ -13,10 +13,72 @@
 \section{Preamble}
 
     \subsection{Introduction}
+    This project is based on the aerospace-centered game of KSP. The game, to a certain accuracy, simulates basic physical forces applied on a rocket in space or atmospheric conditions, taking into account:
+    \begin{enumerate}
+        \item Constantly updating mass,
+        \item Atmospheric, dynamic drag,
+        \item Specific Impulse, $I_{sp} = \frac{F}{\dot{m}}$,
+        \item Changes in CoM, CoT and CoL, and
+        \item Most importantly, two body gravity effects and orbital solutions.
+    \end{enumerate}
+    The main reason for the game being as accessible as it happens to be is due to the precalculation of a plethora of values that would normally have to be calculated by rather difficult equations, requiring basic knowledge of orbital mechanics. The redaction of readily available orbital and velocity equations would make the game a challenge, both mathematically and practically, to anyone unfamiliar with the aforementioned concepts.
+    \newline\newline
+    Another 'simplifying' factor of the platform is the availability of direct manual control of a craft as long as there is a pilot; thus, unfairly supplying the user with information they would otherwise have no access to, such as transfer solutions which would have required precalculation and planning and thus would not be possible for the pilot of said craft to solve on the spot. 
+    \newline\newline
+    The goals of the project will be listed in the following section.
+    \pagebreak
 
     \subsection{Goals}
 
-    \subsection{Scope of the Project & Methodology}
+    Acknowledging the aforementioned information, the goals of this project, whlist using the \textbf{minimal amount of readily available information} whilst \textbf{maximising the use of realistically and manually obtained data}, \textbf{minimising spending} (as tracked by the game [as to not have the luxury of a plentitude of tests, ensuring dependence on calculation]) and \textbf{prohibiting manual control} (obliging programmed flights using the programming language KoS,) are as follows;
 
+    \begin{enumerate}
+        \item Take off from Earth (game equivalent),
+        \item Achieve a low-Earth orbit (ideally at ~100km),
+        \item Calculate, then execute a close-to-ideal co-planar transfer to Moon (game equivalent),
+        \item Calculate, then execute capture burn,
+        \item Release payload / Complete experiments,
+        \item Calculate, then execute escape burn,
+        \item Aerobrake using the Earth's atmosphere, and
+        \item Parachute as close as realistically possible to the launch site (recovery cost is calculated).
+    \end{enumerate}
 
+    By accomplishing these goals, I hope/aim to;
+    \begin{enumerate}
+        \item Deepen my understanding of basic physics concepts and instinctualise their effects by using them on realistic examples, such as a change of mass's effect on acceleration,
+        \item Familiarise myself with 12th-grade math concepts such as Integrals and Derivatives, which will be required in calculating certain values,
+        \item Introduce myself to the effects of drag on a moving object,
+        \item Learn the basics of the academically-common markdown language LaTeX (which this document is written in), and
+        \item Transfer abstract formulas to programming languages (mainly being C++ and KoS).
+    \end{enumerate}
+
+    \pagebreak
+
+    \subsection{Scope of the Project}
+
+    Due to the obvious difficulty of an actual, fully-fledged calculation of such a mission, some simplifications are in order. The main concessions I will give to the budget will be;
+
+    \subsubsection{Simplification of Drag}
+    Due to the erratic, non-linear and complicated nature of the calculation of drag in Earth's atmospheric conditions, a rough average will be taken. Not assuming air density to be the same throughout the atmosphere, but taking the average of each stage's predicted altitude's air density. This simplification is necessary as it would be extremely difficult to account for this whilst also completing a gravity turn (a manoeuvre that pitches the aircraft towards the Earth's equator, reducing  \(\Delta \)V required to complete a low orbit, explained in detail later); constantly changing the rate of ascension. \newline
+    Naturally, the drag coefficient will be precalculated as such value is usually found utilising wind tunnels. \newline
+    \subsubsection{Details Regarding Planets, Engines and Parts}
+    Planetary gravity, rough atmosphere falloff altitude and terrain height will be assumed to have been surveyed and calculated in advance, as is the case in our current day and age where most values regarding Earth and neighbouring celestial objects are already known. Such information that will be included in the calculations will be detailed in the following sections.\newline\newline
+    Regarding engines, as they are considered to be outsourced, the following information(s) will be assumed readily available;
+
+    \begin{enumerate}
+        \item F at sea level,
+        \item F at near-vacuum conditions,
+        \item $I_{sp}$,
+        \item Mass, and
+        \item Liters of fuel consumed per second.
+    \end{enumerate}
+    For other parts and fuel-containing systems, the information pre-available are as the following;
+    \begin{enumerate}
+        \item Full weight,
+        \item Dry weight, 
+        \item If relevant electrical consumption, and
+        \item Stress resistance.
+    \end{enumerate}
+    \subsubsection{Self-limitations}
+    Other than the aforementioned exceptions, values such as j, a, v, orbital eccentricity, required \(\Delta \)V for transfer, return, escape etc. will all be calculated manually and documented here.
 \end{document}
